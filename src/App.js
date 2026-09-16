@@ -1,24 +1,25 @@
 import React from "react";
-import { Navbar } from "./components";
-import {
-  About,
-  Footer,
-  Header,
-  Skills,
-  Work,
-} from "./containers";
+import { MotionConfig } from "framer-motion";
+import { Navbar, ScrollProgress, ScrollToTop } from "./components";
+import { About, Contact, Experience, Footer, Hero, Projects, Skills } from "./containers";
 import "./App.scss";
 
 const App = () => {
   return (
-    <div className={`app`}>
-      <Navbar />
-      <Header />
-      <About />
-      <Skills />
-      <Work />
-      <Footer />
-    </div>
+    <MotionConfig reducedMotion="user">
+      <div className="app">
+        <ScrollProgress />
+        <Navbar />
+        <Hero />
+        <About />
+        <Experience />
+        <Skills />
+        <Projects />
+        <Contact />
+        <Footer />
+        <ScrollToTop />
+      </div>
+    </MotionConfig>
   );
 };
 

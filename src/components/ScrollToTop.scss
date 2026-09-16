@@ -1,0 +1,24 @@
+.scroll-to-top {
+  position: fixed;
+  bottom: 1.75rem;
+  right: 1.75rem;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(120deg, var(--accent), var(--accent-3));
+  color: #fff;
+  font-size: 1.2rem;
+  box-shadow: 0 12px 30px -10px rgba(99, 102, 241, 0.75);
+  z-index: 900;
+
+  @media screen and (max-width: 450px) {
+    bottom: 1.1rem;
+    right: 1.1rem;
+    width: 42px;
+    height: 42px;
+  }
+}

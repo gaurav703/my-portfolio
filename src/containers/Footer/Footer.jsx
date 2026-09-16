@@ -1,117 +1,31 @@
-import React, { useRef, useState } from "react";
-import emailjs from "@emailjs/browser";
-import { images } from "../../constants";
-import { AppWrap, MotionWrap } from "../../wrapper";
-// import { client } from "../../client";
+import React from "react";
+import { motion } from "framer-motion";
+import SectionRule from "../../components/SectionRule";
+import ScrambleText from "../../components/ScrambleText";
+import SocialLinks from "../../components/SocialLinks";
+import { profile } from "../../data/portfolio";
+import { cornerIn, popOn, reveal, useParent } from "../../utils/motion";
 import "./Footer.scss";
-import { useTheme } from "../../hooks/useTheme";
+
 const Footer = () => {
-  const form = useRef();
-  const [isFormSubmited, setIsFormSubmited] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const sendEmail = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-  };
-  // const [formData, setFormData] = useState({
-  //   name: "",
-  //   email: "",
-  //   message: "",
-  // });
+  const year = new Date().getFullYear();
+  const inner = useParent(0.08);
 
-  // const { name, email, message } = formData;
-  // const handleChangeInput = (e) => {
-
-  //   const { name, value } = e.target;
-  //   setFormData({ ...formData, [name]: value });
-  // };
-  // const handleSubmit = () => {
-  //   setLoading(true);
-  //   const contact = {
-  //     _type: "contact",
-  //     name: name,
-  //     email: email,
-  //     message: message,
-  //   };
-  //   client.create(contact).then(() => {
-  //     setLoading(false);
-  //     setIsFormSubmited(false);
-  //   });
-  // };
-  const { mode } = useTheme();
   return (
-    <>
-      <h2 className={`head-text ${mode}`}>Take a coffe & chat with me</h2>
-      <div className="app__footer-cards">
-        <div className="app__footer-card">
-          <img src={images.email} alt="email" />
-          <a href="mailto:borisfeze9@gmail.com" className="p-text">
-            gauravkamble704@gmail.com
-          </a>
-        </div>
-        <div className="app__footer-card">
-          <img src={images.mobile} alt="mobile" />
-          <a href="tel: +91 7709551702" className="p-text">
-            +91 7709551702
-          </a>
-        </div>
-      </div>
-      {!isFormSubmited ? (
-        <form
-          className={`app__footer-form ${mode} app__flex`}
-          ref={form}
-          onSubmit={sendEmail}
-        >
-          <div className="app__flex">
-            <input
-              type="text"
-              className={`p-text ${mode}`}
-              placeholder="Your Name"
-              // value={name}
-              name="name"
-              // onChange={handleChangeInput}
-            />
-          </div>
-          <div className="app__flex">
-            <input
-              type="email"
-              className={`p-text ${mode}`}
-              placeholder="Your Email"
-              // value={email}
-              name="email"
-              // onChange={handleChangeInput}
-            />
-          </div>
-          <div>
-            <textarea
-              name="message"
-              // value={message}
-              placeholder="Your Message"
-              className={`p-text ${mode}`}
-              // onChange={handleChangeInput}
-            ></textarea>
-          </div>
-          <button
-            type="submit"
-            className={`p-text ${mode}`}
-            // onClick={handleSubmit}
-          >
-            {loading ? "Sending..." : " Send Message"}
-          </button>
-        </form>
-      ) : (
-        <div>
-          <h3 className={`head-text ${mode}`}>
-            Thank you for getting in touch
-          </h3>
-        </div>
-      )}
-    </>
+    <footer className="footer">
+      <SectionRule />
+      <motion.div
+        className="container footer__inner"
+        {...reveal(inner, { once: true, amount: 0.4 })}
+      >
+        <ScrambleText as="p" className="footer__brand mono" text="gaurav.dev" />
+        <SocialLinks className="footer__socials" itemVariants={cornerIn} />
+        <motion.p className="footer__copy mono" variants={popOn}>
+          © {year} {profile.name} — built with React &amp; Framer Motion
+        </motion.p>
+      </motion.div>
+    </footer>
   );
 };
 
-export default AppWrap(
-  MotionWrap(Footer, "app__footer"),
-  "contact",
-  "app__whitebg"
-);
+export default Footer;

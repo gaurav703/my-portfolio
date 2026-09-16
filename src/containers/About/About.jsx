@@ -1,69 +1,78 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { motion } from "framer-motion";
+import { FiCloud, FiCode, FiCpu, FiZap } from "react-icons/fi";
+import Section from "../../components/Section";
+import { about } from "../../data/portfolio";
+import { TRAVEL, fadeUp, gridIn, reveal, slideX, useParent } from "../../utils/motion";
 import "./About.scss";
-import { AppWrap, MotionWrap } from "../../wrapper";
-import { useTheme } from "../../hooks/useTheme";
+
+const icons = {
+  code: <FiCode />,
+  brain: <FiCpu />,
+  cloud: <FiCloud />,
+  bolt: <FiZap />,
+};
 
 const About = () => {
-  const { mode } = useTheme();
-  const abouts = [
-    {
-      title: "Frontend Development",
-      description:
-        "I am a frontend developer specializing in creating intuitive and responsive user interfaces.",
-      imgURl: "/front.png",
-    },
-    {
-      title: "Mobile App Development",
-      description:
-        "I am a mobile app developer proficient in building seamless and user-friendly mobile applications.",
-      imgURl: "/appdev.jpg",
-    },
-    {
-      title: "Backend Development",
-      description:
-        "I am a backend developer experienced in designing robust and scalable server-side applications.",
-      imgURl: "/backend.png",
-    },
-    {
-      title: "MERN Stack Development",
-      description:
-        "I am a MERN Stack developer with a passion for creating beautiful and functional web apps using MongoDB, Express.js, React, and Node.js.",
-      imgURl: "/about-img.png",
-    },
-  ];
+  const textColumn = useParent(0.08);
+  const highlights = useParent(0.07);
 
   return (
-    <>
-      <h2 className={`head-text ${mode}`}>
-        <span>Expertise in Development</span> <br />
-        <span>Transforming Ideas</span> into <span>Innovative Solutions</span>
-      </h2>
-      <div className="app__profiles">
-        {abouts.map((about, index) => (
-          <motion.div
-            whileInView={{ opacity: 1 }}
-            whileHover={{ scale: 1.1 }}
-            transition={{ duration: 0.5, type: "tween" }}
-            className={`app__profile-item `}
-            key={index}
-          >
-            <img src={about.imgURl} alt={about.title} />
-            <h2 className={`bold-text ${mode}`} style={{ marginTop: "20px" }}>
-              {about.title}
-            </h2>
-            <p className={`p-text ${mode}`} style={{ marginTop: "10px" }}>
-              {about.description}
-            </p>
-          </motion.div>
-        ))}
+    <Section
+      id="about"
+      index="01"
+      eyebrow="About"
+      rightMeta={<>STACK <span>MERN · TS · AWS</span></>}
+      title={about.heading}
+    >
+      <div className="about__layout">
+        <motion.div
+          className="about__text"
+          {...reveal(textColumn, { once: true, amount: 0.3 })}
+        >
+          {about.paragraphs.map((p, i) => (
+            <motion.p key={i} className="about__paragraph" variants={slideX(-TRAVEL.xs)}>
+              {p}
+            </motion.p>
+          ))}
+
+          <div className="about__education">
+            {about.education.map((edu) => (
+              <motion.div
+                className="about__education-item"
+                key={edu.school}
+                variants={fadeUp}
+              >
+                <p className="about__education-school">{edu.school}</p>
+                <p className="about__education-degree">{edu.degree}</p>
+                <p className="about__education-meta mono">
+                  {edu.period} · {edu.location}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        <motion.div
+          className="about__highlights"
+          {...reveal(highlights, { once: true, amount: 0.3 })}
+        >
+          {about.highlights.map((item) => (
+            <motion.div
+              className="about__highlight glass-card"
+              key={item.title}
+              variants={gridIn}
+              whileHover={{ y: -4 }}
+            >
+              <div className="about__highlight-icon">{icons[item.icon]}</div>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
-    </>
+    </Section>
   );
 };
 
-export default AppWrap(
-  MotionWrap(About, "app__about"),
-  "about",
-  "app__whitebg"
-);
+export default About;

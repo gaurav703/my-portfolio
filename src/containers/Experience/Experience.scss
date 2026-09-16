@@ -1,0 +1,127 @@
+.timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-left: 2.5rem;
+  padding-bottom: 1.4rem;
+
+  @media screen and (max-width: 600px) {
+    padding-left: 1.6rem;
+  }
+}
+
+// Dashed track = the unvisited rail.
+.timeline__spine {
+  position: absolute;
+  left: 11px;
+  top: 8px;
+  bottom: 2.4rem;
+  width: 0;
+  border-left: 1px dashed var(--border);
+
+  @media screen and (max-width: 600px) {
+    left: 5px;
+  }
+}
+
+// Solid fill = the executed rail, scroll-driven.
+.timeline__spine-fill {
+  position: absolute;
+  left: -1px;
+  top: 0;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
+  transform-origin: top center;
+  will-change: transform;
+}
+
+.timeline__item {
+  position: relative;
+}
+
+// Square, not a circle — matches the crop-mark / bracket vocabulary.
+.timeline__node {
+  position: absolute;
+  left: -2.5rem;
+  margin-left: 7px;
+  top: 1.05rem;
+  width: 9px;
+  height: 9px;
+  background: var(--bg);
+  border: 1px solid var(--border-strong);
+  transition: background 0.2s steps(2), border-color 0.2s steps(2),
+    box-shadow 0.2s steps(2);
+
+  @media screen and (max-width: 600px) {
+    left: -1.6rem;
+    margin-left: 1px;
+  }
+}
+
+.timeline__node.is-live {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+.timeline__eof {
+  position: absolute;
+  left: 0;
+  bottom: -0.2rem;
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  color: var(--text-tertiary);
+}
+
+.timeline__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.1rem;
+}
+
+.timeline__head h3 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.timeline__location {
+  font-size: 0.72rem;
+  color: var(--text-tertiary);
+}
+
+.timeline__points {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1.3rem;
+}
+
+.timeline__points li {
+  position: relative;
+  padding-left: 1.1rem;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+.timeline__points li::before {
+  content: "›";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent-3);
+}
+
+.timeline__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
