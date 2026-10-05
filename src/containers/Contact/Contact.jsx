@@ -50,6 +50,7 @@ const Contact = () => {
 
   return (
     <Section
+      backdrop="aurora"
       id="contact"
       index="05"
       eyebrow="Get In Touch"

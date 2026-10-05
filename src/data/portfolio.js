@@ -43,7 +43,7 @@ export const about = {
     {
       title: "Cloud & Auth",
       description:
-        "AWS Cognito auth flows with Lambda triggers, Docker, and CI/CD pipelines with OTA mobile updates.",
+        "AWS auth flows with Lambda triggers, Docker, and CI/CD pipelines with OTA mobile updates.",
       icon: "cloud",
     },
     {
@@ -79,10 +79,10 @@ export const experience = [
       "Built and shipped full-stack features across web (React/Next.js), mobile (React Native), and Node.js services for a real-estate ERP serving 500+ active users, with a reusable component and Redux Toolkit system that cut code duplication by ~25%.",
       "Built full-stack OpenAI/LLM integrations (API design + prompt engineering) powering automated report summarization, lead qualification, and document data extraction — using structured (JSON) outputs for reliable, production-ready parsing.",
       "Designed and built Node.js REST services for the Sales, Inventory, and Reporting modules — pagination, filtering, and role-based access control.",
-      "Implemented a custom AWS Cognito authentication flow (Lambda triggers) for builder onboarding and integrated Meta Lead Ads into the lead-generation pipeline.",
+      "Implemented a custom AWS authentication flow (Lambda triggers) for builder onboarding and integrated Meta Lead Ads into the lead-generation pipeline.",
       "Improved web performance by ~30% via SSR, code splitting, and render optimization, and set up OTA updates for the React Native apps for instant production fixes.",
     ],
-    tags: ["React", "Next.js", "React Native", "Node.js", "AWS Cognito", "OpenAI API"],
+    tags: ["React", "Next.js", "React Native", "Node.js", "AWS", "OpenAI API"],
     current: true,
   },
   {
@@ -127,7 +127,7 @@ export const skillGroups = [
   },
   {
     category: "Cloud & DevOps",
-    skills: ["AWS Cognito", "AWS Lambda", "Docker", "CI/CD", "Git", "GitHub"],
+    skills: ["AWS", "Docker", "CI/CD", "Git", "GitHub"],
   },
   {
     category: "Developer Tools",

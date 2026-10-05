@@ -85,10 +85,11 @@ const Experience = () => {
 
   return (
     <Section
+      backdrop="beams"
       id="experience"
       index="02"
       eyebrow="Experience"
-      rightMeta={<>STATUS <span>2 ROLES · 1.5+ YRS</span></>}
+      rightMeta={<>STATUS <span>2 ROLES · 2+ YRS</span></>}
       title="Where I've worked"
       subtitle="A quick look at the teams I've shipped production software with."
       alt

@@ -61,3 +61,64 @@
 .window-card__body {
   padding: 1.5rem;
 }
+
+// Cursor spotlight + rotating gradient border, shared with .glass-card.
+// --mx/--my come from the pointer listener in AnimatedBackground.
+.window-card,
+.glass-card {
+  isolation: isolate;
+}
+
+.window-card::before,
+.glass-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  background: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in srgb, var(--accent-3) 14%, transparent),
+    transparent 55%
+  );
+}
+
+.window-card::after,
+.glass-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  background: conic-gradient(
+    from var(--angle),
+    var(--accent),
+    var(--accent-5),
+    var(--accent-4),
+    var(--accent-2),
+    var(--accent)
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  animation: spin-angle 4s linear infinite;
+}
+
+.window-card:hover::before,
+.window-card:hover::after,
+.glass-card:hover::before,
+.glass-card:hover::after {
+  opacity: 1;
+}
+
+.window-card__bar,
+.window-card__body {
+  position: relative;
+}

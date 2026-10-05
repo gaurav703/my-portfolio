@@ -1,0 +1,226 @@
+.backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+// ---------- mesh: two morphing gradient blobs ----------
+.backdrop__morph {
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  filter: blur(60px);
+  opacity: calc(var(--blob-opacity) * 0.8);
+  animation: morph 16s ease-in-out infinite, float-y 12s ease-in-out infinite alternate;
+}
+
+.backdrop__morph--a {
+  top: 8%;
+  right: 4%;
+  background: linear-gradient(135deg, var(--accent-5), var(--accent-4));
+}
+
+.backdrop__morph--b {
+  bottom: 0;
+  left: -6%;
+  width: 340px;
+  height: 340px;
+  background: linear-gradient(135deg, var(--accent-2), var(--accent));
+  animation-delay: -6s, -3s;
+}
+
+@keyframes morph {
+  0%, 100% { border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%; transform: rotate(0deg); }
+  33% { border-radius: 70% 30% 46% 54% / 30% 39% 61% 70%; }
+  66% { border-radius: 30% 70% 30% 70% / 60% 30% 70% 40%; transform: rotate(180deg); }
+}
+
+@keyframes float-y {
+  from { translate: 0 -30px; }
+  to { translate: 0 40px; }
+}
+
+// ---------- beams: vertical guide lines with falling meteors ----------
+.backdrop__lines {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 120px 100%;
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 20%, #000 80%, transparent);
+  mask-image: linear-gradient(180deg, transparent, #000 20%, #000 80%, transparent);
+  opacity: 0.6;
+}
+
+.backdrop__meteor {
+  position: absolute;
+  top: -160px;
+  width: 1px;
+  height: 160px;
+  background: linear-gradient(180deg, transparent, var(--accent-2), var(--accent-3));
+  box-shadow: 0 0 12px var(--accent-2);
+  animation: meteor 7s linear infinite;
+}
+
+@keyframes meteor {
+  0% { transform: translateY(0); opacity: 0; }
+  10% { opacity: 1; }
+  70% { opacity: 1; }
+  100% { transform: translateY(calc(100vh + 400px)); opacity: 0; }
+}
+
+.backdrop__beam {
+  position: absolute;
+  top: -40%;
+  left: -30%;
+  width: 40%;
+  height: 180%;
+  transform: rotate(18deg);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--accent-5) 10%, transparent),
+    transparent
+  );
+  animation: beam-sweep 14s ease-in-out infinite;
+}
+
+@keyframes beam-sweep {
+  0% { translate: 0 0; }
+  50% { translate: 260% 0; }
+  100% { translate: 0 0; }
+}
+
+// ---------- rings: concentric rotating conic rings + radar sweep ----------
+.backdrop__ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  translate: -50% -50%;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--angle),
+    transparent 0deg,
+    var(--accent-3) 60deg,
+    transparent 120deg,
+    var(--accent-4) 220deg,
+    transparent 280deg
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  opacity: 0.45;
+  animation: spin-angle 18s linear infinite;
+}
+
+.backdrop__ring--1 { width: 420px; height: 420px; }
+.backdrop__ring--2 { width: 720px; height: 720px; animation-duration: 26s; animation-direction: reverse; }
+.backdrop__ring--3 { width: 1040px; height: 1040px; animation-duration: 40s; opacity: 0.3; }
+
+.backdrop__radar {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1040px;
+  height: 1040px;
+  border-radius: 50%;
+  translate: -50% -50%;
+  background: conic-gradient(
+    from 0deg,
+    color-mix(in srgb, var(--accent-2) 14%, transparent),
+    transparent 60deg
+  );
+  animation: spin 10s linear infinite;
+  -webkit-mask-image: radial-gradient(circle, #000 20%, transparent 70%);
+  mask-image: radial-gradient(circle, #000 20%, transparent 70%);
+}
+
+@keyframes spin {
+  to { rotate: 360deg; }
+}
+
+// ---------- grid: perspective floor scrolling toward the viewer ----------
+.backdrop--grid {
+  perspective: 600px;
+}
+
+.backdrop__floor {
+  position: absolute;
+  left: -50%;
+  right: -50%;
+  bottom: -10%;
+  height: 70%;
+  transform-origin: center top;
+  transform: rotateX(70deg);
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--accent-3) 40%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--accent-3) 40%, transparent) 1px, transparent 1px);
+  background-size: 60px 60px;
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 60%);
+  mask-image: linear-gradient(180deg, transparent, #000 60%);
+  opacity: 0.35;
+  animation: floor-move 3s linear infinite;
+}
+
+@keyframes floor-move {
+  to { background-position: 0 60px; }
+}
+
+.backdrop__horizon {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 62%;
+  height: 160px;
+  background: radial-gradient(
+    ellipse 50% 100% at 50% 100%,
+    color-mix(in srgb, var(--accent-4) 22%, transparent),
+    transparent 70%
+  );
+  animation: horizon-pulse 6s ease-in-out infinite;
+}
+
+@keyframes horizon-pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+// ---------- aurora: soft waving gradient bands ----------
+.backdrop__wave {
+  position: absolute;
+  left: -25%;
+  width: 150%;
+  height: 260px;
+  border-radius: 50%;
+  filter: blur(50px);
+  opacity: calc(var(--blob-opacity) * 0.7);
+  animation: wave 14s ease-in-out infinite alternate;
+}
+
+.backdrop__wave--1 {
+  top: 10%;
+  background: linear-gradient(90deg, transparent, var(--accent), var(--accent-2), transparent);
+}
+
+.backdrop__wave--2 {
+  top: 40%;
+  background: linear-gradient(90deg, transparent, var(--accent-4), var(--accent-5), transparent);
+  animation-duration: 18s;
+  animation-delay: -5s;
+}
+
+.backdrop__wave--3 {
+  bottom: 0;
+  height: 200px;
+  background: linear-gradient(90deg, transparent, var(--accent-2), var(--accent-3), transparent);
+  animation-duration: 22s;
+  animation-delay: -9s;
+}
+
+@keyframes wave {
+  0% { transform: translateX(-10%) rotate(-4deg) scaleY(0.8); }
+  50% { transform: translateX(6%) rotate(3deg) scaleY(1.2); }
+  100% { transform: translateX(12%) rotate(-2deg) scaleY(0.9); }
+}

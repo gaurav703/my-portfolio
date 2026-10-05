@@ -19,6 +19,7 @@ const About = () => {
 
   return (
     <Section
+      backdrop="mesh"
       id="about"
       index="01"
       eyebrow="About"
@@ -62,7 +63,7 @@ const About = () => {
               className="about__highlight glass-card"
               key={item.title}
               variants={gridIn}
-              whileHover={{ y: -4 }}
+              whileHover={{ y: -6, scale: 1.02 }}
             >
               <div className="about__highlight-icon">{icons[item.icon]}</div>
               <h3>{item.title}</h3>

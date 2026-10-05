@@ -29,6 +29,29 @@
   background: var(--surface);
 }
 
+.section > .container {
+  position: relative;
+  z-index: 1;
+}
+
+.section__title-bar {
+  display: block;
+  width: 72px;
+  height: 3px;
+  margin-top: 0.9rem;
+  border-radius: 3px;
+  background: var(--grad-main);
+  background-size: 200% 100%;
+  animation: gradient-pan 4s linear infinite;
+  transform-origin: left center;
+}
+
+.section__head--center .section__title-bar {
+  margin-left: auto;
+  margin-right: auto;
+  transform-origin: center;
+}
+
 .section__eyebrow-row {
   display: flex;
   align-items: center;
@@ -111,13 +134,16 @@
 }
 
 .gradient-text {
-  background: linear-gradient(120deg, var(--accent) 0%, var(--accent-3) 100%);
+  background: var(--grad-main);
+  background-size: 200% 100%;
+  animation: gradient-pan 8s linear infinite;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
 .glass-card {
+  position: relative;
   background: var(--bg-elevated);
   border: 1px solid var(--border);
   border-radius: 10px;
@@ -151,15 +177,17 @@
 }
 
 .btn--primary {
-  background: var(--text-primary);
-  color: var(--bg);
-  box-shadow: 0 10px 26px -14px rgba(0, 0, 0, 0.5);
+  position: relative;
+  color: #fff;
+  background: var(--grad-main);
+  background-size: 200% 100%;
+  animation: gradient-pan 6s linear infinite;
+  box-shadow: 0 12px 30px -12px color-mix(in srgb, var(--accent-5) 70%, transparent);
 }
 
 .btn--primary:hover {
-  background: var(--accent);
-  color: #fff;
   transform: translateY(-2px);
+  box-shadow: 0 16px 40px -10px color-mix(in srgb, var(--accent-4) 70%, transparent);
 }
 
 .btn--ghost {
@@ -175,6 +203,7 @@
 }
 
 .tag-chip {
+  position: relative;
   display: inline-flex;
   align-items: center;
   padding: 0.3rem 0.7rem;

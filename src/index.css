@@ -5,38 +5,50 @@
   --font-base: "Inter", sans-serif;
   --font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
 
-  --accent: #4f5bd5;
-  --accent-2: #06b6d4;
-  --accent-3: #7c8aff;
+  /* One accent: blue. The numbered aliases all resolve to shades of it so
+     older rules that reference --accent-2..5 stay on-palette. */
+  --accent: #3b82f6;
+  --accent-soft: #60a5fa;
+  --accent-deep: #1d4ed8;
+  --accent-2: var(--accent-soft);
+  --accent-3: var(--accent-soft);
+  --accent-4: var(--accent);
+  --accent-5: var(--accent);
   --ok: #22c55e;
+  --grad-main: linear-gradient(110deg, var(--accent) 0%, var(--accent-soft) 50%, var(--accent) 100%);
+  --blob-opacity: 0.32;
 
   color-scheme: dark;
-  --bg: #08080a;
-  --bg-elevated: #0e0e12;
-  --surface: rgba(255, 255, 255, 0.035);
-  --surface-hover: rgba(255, 255, 255, 0.065);
-  --border: rgba(255, 255, 255, 0.11);
-  --border-strong: rgba(255, 255, 255, 0.22);
-  --text-primary: #f2f2f5;
-  --text-secondary: #9898a3;
-  --text-tertiary: #63636e;
-  --shadow: rgba(0, 0, 0, 0.5);
-  --dot: rgba(255, 255, 255, 0.14);
+  --bg: #000000;
+  --bg-elevated: #0a0a0a;
+  --surface: rgba(255, 255, 255, 0.03);
+  --surface-hover: rgba(255, 255, 255, 0.06);
+  --border: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.2);
+  --text-primary: #fafafa;
+  --text-secondary: #a1a1aa;
+  --text-tertiary: #63636b;
+  --shadow: rgba(0, 0, 0, 0.6);
+  --dot: rgba(255, 255, 255, 0.1);
 }
 
 :root[data-theme="light"] {
   color-scheme: light;
-  --bg: #f8f8f7;
+  --accent: #2563eb;
+  --accent-soft: #3b82f6;
+  --accent-deep: #1e40af;
+  --bg: #ffffff;
   --bg-elevated: #ffffff;
-  --surface: rgba(10, 10, 20, 0.03);
-  --surface-hover: rgba(10, 10, 20, 0.06);
-  --border: rgba(10, 10, 30, 0.11);
-  --border-strong: rgba(10, 10, 30, 0.28);
-  --text-primary: #0e0e12;
-  --text-secondary: #55555f;
-  --text-tertiary: #8a8a94;
-  --shadow: rgba(20, 20, 40, 0.12);
-  --dot: rgba(10, 10, 30, 0.14);
+  --surface: rgba(0, 0, 0, 0.025);
+  --surface-hover: rgba(0, 0, 0, 0.05);
+  --border: rgba(0, 0, 0, 0.09);
+  --border-strong: rgba(0, 0, 0, 0.2);
+  --text-primary: #09090b;
+  --text-secondary: #52525b;
+  --text-tertiary: #a1a1aa;
+  --shadow: rgba(15, 23, 42, 0.12);
+  --dot: rgba(0, 0, 0, 0.08);
+  --blob-opacity: 0.16;
 }
 
 * {
@@ -51,8 +63,6 @@ html {
 
 body {
   background: var(--bg);
-  background-image: radial-gradient(var(--dot) 1px, transparent 1px);
-  background-size: 26px 26px;
   color: var(--text-primary);
   font-family: var(--font-base);
   transition: background-color 0.35s ease, color 0.35s ease;
@@ -96,6 +106,28 @@ img {
 code,
 .mono {
   font-family: var(--font-mono);
+}
+
+/* Lets keyframes rotate a conic-gradient angle (animated gradient borders). */
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes spin-angle {
+  to {
+    --angle: 360deg;
+  }
+}
+
+@keyframes gradient-pan {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

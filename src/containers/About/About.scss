@@ -87,3 +87,27 @@
   color: var(--text-secondary);
 }
 
+
+.about__highlight-icon {
+  position: relative;
+  color: #fff;
+  border: none;
+  background: var(--grad-main);
+  background-size: 300% 100%;
+  animation: gradient-pan 7s linear infinite;
+  box-shadow: 0 10px 24px -10px var(--accent-5);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about__highlight:nth-child(2) .about__highlight-icon { animation-delay: -1.7s; }
+.about__highlight:nth-child(3) .about__highlight-icon { animation-delay: -3.4s; }
+.about__highlight:nth-child(4) .about__highlight-icon { animation-delay: -5.1s; }
+
+.about__highlight:hover .about__highlight-icon {
+  transform: rotate(360deg) scale(1.1);
+}
+
+.about__highlight {
+  backdrop-filter: blur(6px);
+  background: color-mix(in srgb, var(--bg-elevated) 75%, transparent);
+}

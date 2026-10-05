@@ -5,3 +5,6 @@ export { default as ScrollToTop } from "./ScrollToTop";
 export { default as SocialLinks } from "./SocialLinks";
 export { default as WindowCard } from "./WindowCard";
 export { default as SectionRule } from "./SectionRule";
+export { default as Magnetic } from "./Magnetic";
+export { default as AnimatedBackground } from "./AnimatedBackground";
+export { default as Tilt } from "./Tilt";
