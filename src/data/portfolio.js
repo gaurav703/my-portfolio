@@ -15,7 +15,7 @@ export const profile = {
   resumeUrl: "/Gaurav_Kamble_Resume.pdf",
   social: {
     github: "https://github.com/gaurav703",
-    linkedin: "https://linkedin.com/in/gaurav-kamble",
+    linkedin: "https://www.linkedin.com/in/gaurav-kamble-7239a1226/",
     portfolio: "https://my-portfolio-six-dusky-27.vercel.app/",
   },
 };
