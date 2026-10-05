@@ -26,3 +26,38 @@
   font-size: 0.72rem;
   color: var(--text-tertiary);
 }
+
+.footer {
+  position: relative;
+  overflow: hidden;
+}
+
+.footer::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -220px;
+  width: 900px;
+  height: 320px;
+  translate: -50% 0;
+  border-radius: 50%;
+  background: conic-gradient(from var(--angle), var(--accent), var(--accent-5), var(--accent-4), var(--accent-2), var(--accent));
+  filter: blur(90px);
+  opacity: calc(var(--blob-opacity) * 0.6);
+  animation: spin-angle 12s linear infinite;
+  pointer-events: none;
+}
+
+.footer__inner {
+  position: relative;
+}
+
+.footer__brand {
+  font-size: 1.4rem;
+  background: var(--grad-main);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-pan 6s linear infinite;
+}

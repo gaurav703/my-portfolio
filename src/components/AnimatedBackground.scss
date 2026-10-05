@@ -1,0 +1,72 @@
+.bg-layer {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.bg-layer__blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: var(--blob-opacity);
+  will-change: transform;
+}
+
+.bg-layer__blob--1 {
+  top: -30vmax;
+  left: 50%;
+  width: 70vmax;
+  height: 50vmax;
+  margin-left: -35vmax;
+  background: radial-gradient(ellipse, var(--accent) 0%, transparent 65%);
+  animation: blob-drift-1 24s ease-in-out infinite alternate;
+}
+
+.bg-layer__blob--2 {
+  bottom: -26vmax;
+  right: -14vmax;
+  width: 44vmax;
+  height: 44vmax;
+  background: radial-gradient(circle, var(--accent-deep) 0%, transparent 62%);
+  opacity: calc(var(--blob-opacity) * 0.6);
+  animation: blob-drift-2 30s ease-in-out infinite alternate;
+}
+
+@keyframes blob-drift-1 {
+  0% { transform: translate(-8vw, 0) scale(1); }
+  100% { transform: translate(8vw, 6vh) scale(1.1); }
+}
+
+@keyframes blob-drift-2 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-18vw, -12vh) scale(1.15); }
+}
+
+.bg-layer__grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(var(--dot) 1px, transparent 1px);
+  background-size: 26px 26px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 30%, transparent 85%);
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 30%, transparent 85%);
+  animation: grid-breathe 9s ease-in-out infinite;
+}
+
+@keyframes grid-breathe {
+  0%, 100% { opacity: 0.65; }
+  50% { opacity: 1; }
+}
+
+.bg-layer__glow {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  background: radial-gradient(
+    600px circle at var(--cx, 50%) var(--cy, 50%),
+    color-mix(in srgb, var(--accent-3) 12%, transparent),
+    transparent 60%
+  );
+}

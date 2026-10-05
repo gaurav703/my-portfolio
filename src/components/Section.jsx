@@ -2,7 +2,13 @@ import React from "react";
 import { motion } from "framer-motion";
 import SectionRule from "./SectionRule";
 import ScrambleText from "./ScrambleText";
-import { fadeUp, lineUp, popOn, useParent, VIEW_HEAD } from "../utils/motion";
+import SectionBackdrop from "./SectionBackdrop";
+import { EASE, fadeUp, lineUp, popOn, useParent, VIEW_HEAD } from "../utils/motion";
+
+const barIn = {
+  hidden: { scaleX: 0 },
+  show: { scaleX: 1, transition: { duration: 0.7, ease: EASE.out } },
+};
 
 const Section = ({
   id,
@@ -13,6 +19,7 @@ const Section = ({
   subtitle,
   center = false,
   alt = false,
+  backdrop,
   className = "",
   children,
 }) => {
@@ -26,6 +33,7 @@ const Section = ({
         id={id}
         className={`section ${alt ? "section--alt" : ""} ${className}`}
       >
+        <SectionBackdrop variant={backdrop} />
         <div className="container">
           {(eyebrow || title || subtitle) && (
             <motion.div
@@ -55,6 +63,9 @@ const Section = ({
                     {title}
                   </motion.span>
                 </h2>
+              )}
+              {title && (
+                <motion.span className="section__title-bar" variants={barIn} />
               )}
               {subtitle && (
                 <motion.p className="section__subtitle" variants={fadeUp}>

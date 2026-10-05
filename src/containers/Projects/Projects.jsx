@@ -2,6 +2,7 @@ import React, { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiExternalLink, FiGithub } from "react-icons/fi";
 import Section from "../../components/Section";
+import Tilt from "../../components/Tilt";
 import WindowCard from "../../components/WindowCard";
 import { projects } from "../../data/portfolio";
 import { useCountUp } from "../../hooks/useCountUp";
@@ -38,11 +39,12 @@ const Projects = () => {
 
   return (
     <Section
+      backdrop="grid"
       id="projects"
       index="04"
       eyebrow="Work"
       rightMeta={<ShowingMeta n={filtered.length} total={projects.length} />}
-      title="Selected Projects"
+      title="Projects"
       subtitle="A mix of production work and side projects — from AI-powered monitoring tools to mobile apps used by thousands."
       alt
     >
@@ -80,6 +82,7 @@ const Projects = () => {
                 hover: { y: -6, transition: { duration: DUR.xs, ease: EASE.snap } },
               }}
             >
+              <Tilt max={6}>
               <WindowCard
                 path={`/projects/${slugify(project.title)}`}
                 tag={project.category}
@@ -132,6 +135,7 @@ const Projects = () => {
                   </div>
                 </div>
               </WindowCard>
+              </Tilt>
             </motion.div>
           ))}
         </AnimatePresence>
